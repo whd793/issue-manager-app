@@ -6,12 +6,12 @@ interface Props {
   children: string;
 }
 
-const Link = ({ href, children }: Props) => {
+const Link = ({ href, children}: Props) => {
   return (
     <NextLink href={href} passHref legacyBehavior>
       <RadixLink>{children}</RadixLink>
     </NextLink>
-  );
-};
+  )
+}
 
-export default Link;
+export default Link
