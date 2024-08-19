@@ -15,7 +15,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
     try {
       setDeleting(true);
       await axios.delete('/api/issues/' + issueId);
-      router.push('/issues');
+      router.push('/issues/list');
       router.refresh();
     } catch (error) {
       setDeleting(false);
@@ -27,7 +27,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color='red' disabled={isDeleting}>
+          <Button color="red" disabled={isDeleting}>
             Delete Issue
             {isDeleting && <Spinner />}
           </Button>
@@ -38,14 +38,14 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             Are you sure you want to delete this issue? This action cannot be
             undone.
           </AlertDialog.Description>
-          <Flex mt='4' gap='3'>
+          <Flex mt="4" gap="3">
             <AlertDialog.Cancel>
-              <Button variant='soft' color='gray'>
+              <Button variant="soft" color="gray">
                 Cancel
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button color='red' onClick={deleteIssue}>
+              <Button color="red" onClick={deleteIssue}>
                 Delete Issue
               </Button>
             </AlertDialog.Action>
@@ -59,9 +59,9 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             This issue could not be deleted.
           </AlertDialog.Description>
           <Button
-            color='gray'
-            variant='soft'
-            mt='2'
+            color="gray"
+            variant="soft"
+            mt="2"
             onClick={() => setError(false)}
           >
             OK
