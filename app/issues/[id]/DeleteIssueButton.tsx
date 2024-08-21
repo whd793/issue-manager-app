@@ -5,6 +5,7 @@ import { AlertDialog, Button, Flex } from '@radix-ui/themes';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   const router = useRouter();
@@ -15,11 +16,17 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
     try {
       setDeleting(true);
       await axios.delete('/api/issues/' + issueId);
+      toast.success('Issue has been deleted.', {
+        position: 'bottom-left',
+      });
       router.push('/issues/list');
       router.refresh();
     } catch (error) {
       setDeleting(false);
       setError(true);
+      toast.error('changes has been changed.', {
+        position: 'bottom-left',
+      });
     }
   };
 
@@ -68,6 +75,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
           </Button>
         </AlertDialog.Content>
       </AlertDialog.Root>
+      <Toaster />
     </>
   );
 };

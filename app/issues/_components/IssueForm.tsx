@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import SimpleMDE from 'react-simplemde-editor';
 import { z } from 'zod';
+import toast, { Toaster } from 'react-hot-toast';
 
 type IssueFormData = z.infer<typeof issueSchema>;
 
@@ -36,9 +37,14 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       else await axios.post('/api/issues', data);
       router.push('/issues/list');
       router.refresh();
+
+      toast.success('Status has been changed.', {
+        position: 'bottom-left',
+      });
     } catch (error) {
       setSubmitting(false);
       setError('An unexpected error occurred.');
+      toast.error('Changes could not be saved.');
     }
   });
 
@@ -72,6 +78,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           {isSubmitting && <Spinner />}
         </Button>
       </form>
+      <Toaster />
     </div>
   );
 };

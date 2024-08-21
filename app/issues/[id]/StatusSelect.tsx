@@ -36,8 +36,12 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
   //   };
   const assignIssue = (status: Status) => {
     axios
-      .patch('/api/issues/' + issue.id, {
-        status, // Correct the status property here
+      .patch('/api/issues/' + issue.id, { status })
+      .then(() => {
+        // Show success toast on the bottom-left
+        toast.success('Status has been changed.', {
+          position: 'bottom-left',
+        });
       })
       .catch(() => {
         toast.error('Changes could not be saved.');

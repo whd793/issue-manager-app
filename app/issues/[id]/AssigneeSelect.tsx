@@ -19,6 +19,12 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
       .patch('/api/issues/' + issue.id, {
         assignedToUserId: userId || null,
       })
+      .then(() => {
+        // Show success toast on the bottom-left
+        toast.success('Assignee has been changed.', {
+          position: 'bottom-left',
+        });
+      })
       .catch(() => {
         toast.error('Changes could not be saved.');
       });
