@@ -7,6 +7,8 @@ import DeleteIssueButton from './DeleteIssueButton';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/app/auth/authOptions';
 import AssigneeSelect from './AssigneeSelect';
+import StatusSelect from './StatusSelect';
+
 import { cache } from 'react';
 
 interface Props {
@@ -16,6 +18,9 @@ interface Props {
 const fetchUser = cache((issueId: number) =>
   prisma.issue.findUnique({ where: { id: issueId } })
 );
+
+// my code
+// mycode===========================================
 
 const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
@@ -32,6 +37,7 @@ const IssueDetailPage = async ({ params }: Props) => {
       {session && (
         <Box>
           <Flex direction='column' gap='4'>
+            <StatusSelect issue={issue} />
             <AssigneeSelect issue={issue} />
             <EditIssueButton issueId={issue.id} />
             <DeleteIssueButton issueId={issue.id} />
