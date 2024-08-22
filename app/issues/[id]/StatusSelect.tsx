@@ -19,6 +19,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const StatusSelect = ({ issue }: { issue: Issue }) => {
   const { data: users, error, isLoading } = useUsers();
 
+  const router = useRouter();
   if (isLoading) return <Skeleton />;
 
   if (error) return null;
@@ -42,6 +43,7 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
         toast.success('Status has been changed.', {
           position: 'bottom-left',
         });
+        router.refresh();
       })
       .catch(() => {
         toast.error('Changes could not be saved.');
