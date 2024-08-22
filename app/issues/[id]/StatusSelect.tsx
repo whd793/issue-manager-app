@@ -71,13 +71,13 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
     </>
   );
 };
+export const dynamic = 'force-dynamic';
 
 const useUsers = () =>
   useQuery<User[]>({
     queryKey: ['users'],
     queryFn: () => axios.get('/api/users').then((res) => res.data),
-    // staleTime: 60 * 1000, //60s
-    staleTime: 0,
+    staleTime: 5 * 1000, //60s
     retry: 3,
   });
 
