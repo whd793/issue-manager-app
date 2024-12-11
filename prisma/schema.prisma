@@ -91,8 +91,8 @@ model Issue {
   title            String
   description      String
   status           Status   @default(OPEN)
-  createdAt        DateTime @default(now()) @map("createdAt")
-  updatedAt        DateTime @updatedAt @map("updatedAt")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
   assignedToUserId String?
   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
 }
