@@ -91,11 +91,23 @@ model Issue {
   title            String
   description      String
   status           Status   @default(OPEN)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  createdAt        DateTime @default(now()) @map("createdAt")
+  updatedAt        DateTime @updatedAt @map("updatedAt")
   assignedToUserId String?
   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
 }
+
+// model Issue {
+//   id               Int      @id @default(autoincrement())
+//   title            String
+//   description      String
+//   status           Status   @default(OPEN)
+//   createdAt        DateTime @default(now()) @map("createdat")
+//   updatedAt        DateTime @updatedAt @map("updatedat")
+//   assignedToUserId String?
+//   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
+// }
+
 
 enum Status {
   OPEN
