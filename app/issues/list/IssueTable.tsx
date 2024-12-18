@@ -1,6 +1,6 @@
 import { IssueStatusBadge } from '@/app/components';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
-import { Table } from '@radix-ui/themes';
+import { Table, Text } from '@radix-ui/themes'; // Add Text import here
 import Link from 'next/link';
 import React from 'react';
 import NextLink from 'next/link';
@@ -54,6 +54,9 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               </div>
             </Table.Cell>
             <Table.Cell className='hidden md:table-cell'>
+              {getPriorityBadge(issue.priority)}
+            </Table.Cell>
+            <Table.Cell className='hidden md:table-cell'>
               <IssueStatusBadge status={issue.status} />
             </Table.Cell>
             <Table.Cell className='hidden md:table-cell'>
@@ -73,6 +76,11 @@ const columns: {
 }[] = [
   { label: 'Issue', value: 'title' },
   {
+    label: 'Priority',
+    value: 'priority',
+    className: 'hidden md:table-cell',
+  },
+  {
     label: 'Status',
     value: 'status',
     className: 'hidden md:table-cell',
@@ -83,6 +91,26 @@ const columns: {
     className: 'hidden md:table-cell',
   },
 ];
+
+const getPriorityBadge = (priority: string) => {
+  const colors = {
+    LOW: 'gray',
+    MEDIUM: 'blue',
+    HIGH: 'orange',
+    CRITICAL: 'red',
+  };
+  const icons = {
+    LOW: '⚪',
+    MEDIUM: '🟢',
+    HIGH: '🟡',
+    CRITICAL: '🔴',
+  };
+  return (
+    <Text color={colors[priority as keyof typeof colors]}>
+      {icons[priority as keyof typeof icons]} {priority}
+    </Text>
+  );
+};
 
 export const columnNames = columns.map((column) => column.value);
 

@@ -4,8 +4,8 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 import Spinner from '@/app/components/Spinner';
 import { issueSchema } from '@/app/validationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Issue } from '@prisma/client';
-import { Button, Callout, TextField } from '@radix-ui/themes';
+import { Issue, Priority } from '@prisma/client';
+import { Button, Callout, Select, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import 'easymde/dist/easymde.min.css';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,13 @@ import { z } from 'zod';
 import toast, { Toaster } from 'react-hot-toast';
 
 type IssueFormData = z.infer<typeof issueSchema>;
+
+const priorities = [
+  { label: '🔴 Critical', value: 'CRITICAL' },
+  { label: '🟡 High', value: 'HIGH' },
+  { label: '🟢 Medium', value: 'MEDIUM' },
+  { label: '⚪ Low', value: 'LOW' },
+];
 
 const IssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
@@ -64,6 +71,31 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           />
         </TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        <Controller
+          name='priority'
+          control={control}
+          defaultValue={issue?.priority || 'MEDIUM'}
+          render={({ field }) => (
+            <Select.Root
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+            >
+              <Select.Trigger placeholder='Select priority...' />
+              <Select.Content>
+                <Select.Group>
+                  <Select.Label>Priority Level</Select.Label>
+                  {priorities.map((priority) => (
+                    <Select.Item key={priority.value} value={priority.value}>
+                      {priority.label}
+                    </Select.Item>
+                  ))}
+                </Select.Group>
+              </Select.Content>
+            </Select.Root>
+          )}
+        />
+        <ErrorMessage>{errors.priority?.message}</ErrorMessage>
+
         <Controller
           name='description'
           control={control}
