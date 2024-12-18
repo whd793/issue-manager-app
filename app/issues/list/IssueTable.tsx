@@ -106,7 +106,8 @@ const getPriorityBadge = (priority: string) => {
     CRITICAL: '🔴',
   };
   return (
-    <Text color={colors[priority as keyof typeof colors]}>
+    // <Text color={colors[priority as keyof typeof colors]}>
+    <Text>
       {icons[priority as keyof typeof icons]} {priority}
     </Text>
   );
