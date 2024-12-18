@@ -24,6 +24,10 @@ A modern, feature-rich issue tracking system built with Next.js 13, Prisma, and 
 - Issue assignment capabilities
 - User avatars and profile integration
 - Toast notifications for user actions
+- Markdown support for issue descriptions
+- Comment system with real-time updates
+
+
 
 ### Dashboard & Analytics
 - Overview of issue statistics
@@ -41,6 +45,9 @@ A modern, feature-rich issue tracking system built with Next.js 13, Prisma, and 
 - **React Query** for server state management
 - **React Hook Form** for form handling
 - **React Hot Toast** for notifications
+- **React Markdown** for content rendering
+
+
 
 ### Backend
 - **Next.js API Routes** for serverless functions
@@ -104,6 +111,14 @@ enum Priority {
 - Adaptive layouts
 - Touch-friendly interfaces
 - Consistent experience across devices
+
+## 🎯 Performance Optimizations
+- Server-side rendering
+- Optimistic updates
+- Efficient caching
+- Code splitting
+- Image optimization
+
 
 ## 🔧 Code Quality
 
